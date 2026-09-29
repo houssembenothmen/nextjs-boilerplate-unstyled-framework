@@ -1,0 +1,176 @@
+[data-form-field] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+[data-form-field] label,
+[data-form-field] [data-invalid] {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+[data-form-field] p[data-invalid] {
+  margin: 0;
+  color: var(--ui-danger);
+  font-size: 0.8rem;
+}
+
+input,
+textarea,
+select,
+button[role='combobox'] {
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.65rem;
+  background: var(--ui-bg);
+  color: var(--ui-fg);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button[role='combobox']:focus-visible {
+  outline: 3px solid var(--ui-ring);
+  outline-offset: 2px;
+}
+
+input[data-invalid],
+textarea[data-invalid],
+select[data-invalid],
+button[role='combobox'][data-invalid='true'] {
+  border-color: rgba(220, 38, 38, 0.7);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+[data-select] {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+button[role='combobox'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  background: var(--ui-bg);
+}
+
+button[role='combobox'][data-placeholder='true'] {
+  color: var(--ui-muted);
+}
+
+[data-listbox] {
+  min-width: 12rem;
+  margin: 0.25rem 0 0;
+  padding: 0.4rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.75rem;
+  background: var(--ui-bg);
+  box-shadow: var(--ui-shadow);
+}
+
+[data-listbox-option] {
+  display: flex;
+  align-items: center;
+  min-height: 2.4rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+[data-listbox-option][data-active='true'] {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+[data-listbox-option][data-selected='true'] {
+  font-weight: 600;
+}
+
+[data-listbox-option][data-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-password-input] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+[data-password-input] input {
+  padding-right: 2.5rem;
+}
+
+[data-password-input] button {
+  position: absolute;
+  right: 0.5rem;
+  width: 2rem;
+  min-height: 2rem;
+  border: 0;
+  background: transparent;
+  color: var(--ui-muted);
+}
+
+[data-pin-input] {
+  display: flex;
+  gap: 0.5rem;
+}
+
+[data-pin-input-slot] {
+  width: 2.6rem;
+  min-width: 2.6rem;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+input[type='range'] {
+  width: 100%;
+  accent-color: var(--ui-accent);
+}
+
+[role='radiogroup'],
+[role='group'] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+[role='menu'] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.3rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.75rem;
+  background: var(--ui-bg);
+  box-shadow: var(--ui-shadow);
+}
+
+[role='menuitem'],
+[role='menuitemcheckbox'],
+[role='menuitemradio'] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.4rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.5rem;
+  border: 0;
+  background: transparent;
+}
+
+[role='menuitem']:focus-visible,
+[role='menuitemcheckbox']:focus-visible,
+[role='menuitemradio']:focus-visible {
+  outline: 3px solid var(--ui-ring);
+  outline-offset: 0;
+}

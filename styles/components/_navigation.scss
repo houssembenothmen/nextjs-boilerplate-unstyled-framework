@@ -1,0 +1,128 @@
+[data-breadcrumb] {
+  display: flex;
+  align-items: center;
+}
+
+[data-breadcrumb-list] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+}
+
+[data-breadcrumb-item],
+[data-breadcrumb-separator] {
+  display: inline-flex;
+  align-items: center;
+}
+
+[data-breadcrumb-link],
+[data-breadcrumb-page] {
+  font-size: 0.92rem;
+  color: var(--ui-muted);
+}
+
+[data-breadcrumb-page] {
+  color: var(--ui-fg);
+}
+
+[data-tabs] {
+  display: block;
+}
+
+[data-tabs-list] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--ui-border);
+}
+
+[role='tab'] {
+  border: 0;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  min-height: 2.4rem;
+  padding: 0.5rem 0.75rem 0.7rem;
+  color: var(--ui-muted);
+}
+
+[role='tab'][data-state='active'] {
+  border-color: var(--ui-accent);
+  color: var(--ui-fg);
+}
+
+[role='tabpanel'] {
+  padding-top: 1rem;
+  color: var(--ui-muted);
+}
+
+[data-pagination] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-pagination-list] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+}
+
+[data-pagination-item] {
+  display: flex;
+}
+
+[data-pagination-item] button,
+[data-pagination-previous],
+[data-pagination-next],
+[data-pagination-first],
+[data-pagination-last] {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.7rem;
+}
+
+[data-pagination-item] button[aria-current='page'] {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+[data-sidebar] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 220px;
+  padding: 1rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.75rem;
+  background: var(--ui-bg);
+}
+
+[data-sidebar-header],
+[data-sidebar-footer],
+[data-sidebar-group-label] {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ui-muted);
+}
+
+[data-sidebar-menu] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+[data-sidebar-menu-button] {
+  width: 100%;
+  justify-content: flex-start;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+[data-sidebar-menu-button][data-active='true'] {
+  background: rgba(37, 99, 235, 0.06);
+  border-color: rgba(37, 99, 235, 0.12);
+}

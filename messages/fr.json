@@ -1,0 +1,13 @@
+{
+  "common": {
+    "language": "Langue",
+    "english": "English",
+    "french": "Français"
+  },
+  "home": {
+    "title": "Modèle Next.js 16",
+    "subtitle": "Composants accessibles sans style et un client API sans dépendance.",
+    "serverData": "Récupération côté serveur",
+    "apiHint": "Ce bloc s'exécute dans app/page.tsx"
+  }
+}

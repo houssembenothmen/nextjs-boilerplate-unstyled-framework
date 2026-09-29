@@ -1,0 +1,13 @@
+{
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "french": "Français"
+  },
+  "home": {
+    "title": "Next.js 16 boilerplate",
+    "subtitle": "Unstyled, accessible components and a dependency-free API client.",
+    "serverData": "Server-side data fetching",
+    "apiHint": "This block runs in app/page.tsx"
+  }
+}

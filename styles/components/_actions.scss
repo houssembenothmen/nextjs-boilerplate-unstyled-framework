@@ -1,0 +1,148 @@
+button[data-variant],
+button[data-toggle-group-item],
+button[data-accordion-trigger],
+button[data-sidebar-menu-button],
+button[data-pagination-previous],
+button[data-pagination-next],
+button[data-pagination-first],
+button[data-pagination-last],
+button[role='combobox'],
+button[role='tab'],
+button[role='menuitem'],
+button[role='switch'],
+button[role='checkbox'],
+button[role='radio'],
+button[data-variant] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.625rem;
+  background: var(--ui-bg);
+  color: var(--ui-fg);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+button[data-variant]:focus-visible,
+button[role='combobox']:focus-visible,
+button[role='switch']:focus-visible,
+button[role='checkbox']:focus-visible,
+button[role='radio']:focus-visible,
+button[data-toggle-group-item]:focus-visible,
+button[data-accordion-trigger]:focus-visible,
+button[data-sidebar-menu-button]:focus-visible,
+button[data-pagination-previous]:focus-visible,
+button[data-pagination-next]:focus-visible,
+button[data-pagination-first]:focus-visible,
+button[data-pagination-last]:focus-visible {
+  outline: 3px solid var(--ui-ring);
+  outline-offset: 2px;
+}
+
+button[data-variant='primary'] {
+  background: var(--ui-accent);
+  border-color: var(--ui-accent);
+  color: #ffffff;
+}
+
+button[data-variant='outline'] {
+  background: transparent;
+}
+
+button[data-variant='ghost'] {
+  border-color: transparent;
+  background: transparent;
+}
+
+button[data-variant='danger'] {
+  background: var(--ui-danger);
+  border-color: var(--ui-danger);
+  color: #ffffff;
+}
+
+button[data-loading='true'],
+button[data-disabled='true'],
+button:disabled {
+  opacity: 0.6;
+}
+
+[data-button-group] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+[data-button-group] > * {
+  border-radius: 0;
+  border: 0;
+  border-right: 1px solid var(--ui-border);
+}
+
+[data-button-group] > *:last-child {
+  border-right: 0;
+}
+
+[data-toggle-group] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+[data-toggle-group-item] {
+  background: transparent;
+}
+
+[data-toggle-group-item][data-state='on'] {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+button[role='switch'] {
+  position: relative;
+  width: 3.2rem;
+  min-width: 3.2rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.08);
+  border-color: transparent;
+}
+
+button[role='switch'][data-state='checked'] {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+button[role='switch']::after {
+  content: '';
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.2);
+  transform: translateX(0);
+  transition: transform 0.15s ease;
+}
+
+button[role='switch'][data-state='checked']::after {
+  transform: translateX(1.2rem);
+}
+
+button[role='checkbox'],
+button[role='radio'] {
+  min-height: 2.25rem;
+  padding-inline: 0.8rem;
+  border-radius: 0.5rem;
+}
+
+button[role='checkbox'][data-state='checked'],
+button[role='radio'][data-state='checked'] {
+  border-color: rgba(37, 99, 235, 0.38);
+  background: rgba(37, 99, 235, 0.05);
+}

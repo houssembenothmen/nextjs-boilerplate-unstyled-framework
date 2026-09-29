@@ -1,0 +1,352 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Remove default margins */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* 3. Make lists easier to style when used as layout wrappers */
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+    padding: 0;
+}
+
+/* 4. Set core body defaults */
+body {
+    min-height: 100vh;
+    min-height: 100svh; /* Modern mobile browser viewport fix */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Set shorter line-heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.1;
+}
+
+/* 6. Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+}
+
+/* 7. Make images and media easier to work with */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* 8. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* 9. Anything that has been scrolled to should have a scroll-margin */
+:target {
+    scroll-margin-block: 5ex;
+}
+
+/* end of reset */
+
+:root {
+    color-scheme: light dark;
+    --fg: #111827;
+    --bg: #ffffff;
+    --muted: #6b7280;
+    --border: #d1d5db;
+    --accent: #2563eb;
+    --danger: #dc2626;
+    --radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fg: #f3f4f6;
+        --bg: #0b0f19;
+        --muted: #9ca3af;
+        --border: #374151;
+        --accent: #60a5fa;
+    }
+}
+
+body {
+    margin: 0;
+    font-family:
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.5;
+}
+
+[data-page] {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+}
+[data-page][data-narrow] {
+    max-width: 360px;
+    padding-top: 4rem;
+}
+
+[data-hero] h1 {
+    font-size: 1.75rem;
+    margin: 0 0 0.25rem;
+}
+[data-hero] p {
+    color: var(--muted);
+    margin: 0;
+}
+
+[data-section] {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+[data-section] h2 {
+    font-size: 1.125rem;
+    margin: 0 0 0.5rem;
+}
+[data-note] {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+[data-note][data-error] {
+    color: var(--danger);
+}
+[data-code-block] {
+    background: color-mix(in srgb, var(--fg) 5%, transparent);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.85rem;
+}
+
+[data-row] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+[data-stack] {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+code {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background: color-mix(in srgb, var(--fg) 8%, transparent);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+}
+
+/* --- Button --- */
+button[data-variant] {
+    font: inherit;
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+button[data-variant="primary"] {
+    background: var(--accent);
+    color: white;
+}
+button[data-variant="outline"] {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--fg);
+}
+button[data-variant="ghost"] {
+    background: transparent;
+    color: var(--fg);
+}
+button[data-variant="danger"] {
+    background: var(--danger);
+    color: white;
+}
+button[data-disabled],
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+button[data-loading] {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+/* --- Inputs --- */
+input,
+textarea,
+button[role="combobox"] {
+    font: inherit;
+    color: inherit;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    /* padding: .5rem .65rem; */
+    width: 100%;
+}
+input[data-invalid],
+textarea[data-invalid] {
+    border-color: var(--danger);
+}
+[data-form-field] {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+[data-form-field] label {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+[data-form-field] p[data-invalid] {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+/* --- Dialog --- */
+[data-dialog-overlay] {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+[data-dialog-content] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    width: min(90vw, 380px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+[data-dialog-content] h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+[data-dialog-content] p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* --- Tabs --- */
+[data-tabs] {
+    margin-top: 1.5rem;
+}
+[data-tabs-list] {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+[data-tabs-list] button {
+    background: none;
+    border: none;
+    font: inherit;
+    color: var(--muted);
+    padding: 0.5rem 0;
+    margin-bottom: -1px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+[data-tabs-list] button[data-state="active"] {
+    color: var(--fg);
+    border-bottom-color: var(--accent);
+}
+[data-tabs] [role="tabpanel"] {
+    padding-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* --- Select / listbox --- */
+[data-listbox] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.25rem;
+    min-width: var(--anchor-width);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+[data-listbox-option] {
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+[data-listbox-option][data-active] {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+[data-listbox-option][data-selected] {
+    font-weight: 600;
+}
+button[data-placeholder] {
+    color: var(--muted);
+    text-align: left;
+}
+
+/* --- Toast --- */
+[data-toaster] {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+}
+[data-toast] {
+    background: var(--fg);
+    color: var(--bg);
+    border-radius: var(--radius);
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
