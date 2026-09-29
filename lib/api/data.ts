@@ -48,8 +48,8 @@ function buildUrl(endpoint: string, query?: Record<string, unknown>) {
 }
 
 async function extractErrorMessage(res: Response, data: unknown): Promise<string> {
-  if (data && typeof data === 'object' && 'message' in data && typeof (data as any).message === 'string') {
-    return (data as any).message
+  if (data && typeof data === 'object' && 'message' in data && typeof data.message === 'string') {
+    return data.message
   }
   return res.statusText || `Request failed with status ${res.status}`
 }
@@ -96,15 +96,15 @@ async function request<T>(method: HttpMethod, endpoint: string, params: Params =
   }
 }
 
-export function get<T = any>(endpoint: string, params: Params = {}) {
+export function get<T = unknown>(endpoint: string, params: Params = {}) {
   return request<T>('GET', endpoint, params)
 }
-export function post<T = any>(endpoint: string, params: Params = {}) {
+export function post<T = unknown>(endpoint: string, params: Params = {}) {
   return request<T>('POST', endpoint, params)
 }
-export function patch<T = any>(endpoint: string, params: Params = {}) {
+export function patch<T = unknown>(endpoint: string, params: Params = {}) {
   return request<T>('PATCH', endpoint, params)
 }
-export function remove<T = any>(endpoint: string, params: Params = {}) {
+export function remove<T = unknown>(endpoint: string, params: Params = {}) {
   return request<T>('DELETE', endpoint, params)
 }

@@ -28,14 +28,25 @@ const toArray = (v: string | string[] | undefined) => (v === undefined ? [] : Ar
 
 export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(function Accordion(props, ref) {
   const { type, value, defaultValue, onValueChange, collapsible = false, disabled = false, onKeyDown, ...rest } = props as BaseProps & {
-    type: "single" | "multiple"; value?: string | string[]; defaultValue?: string | string[]; onValueChange?: (v: any) => void; collapsible?: boolean;
+    type: "single" | "multiple"; value?: string | string[]; defaultValue?: string | string[]; onValueChange?: ((value: string) => void) | ((value: string[]) => void); collapsible?: boolean;
   };
   const dir = useDirection();
   const single = type === "single";
+  const handleValueChange = React.useCallback(
+    (next: string | string[]) => {
+      if (single) {
+        (onValueChange as ((value: string) => void) | undefined)?.(next as string);
+        return;
+      }
+      (onValueChange as ((value: string[]) => void) | undefined)?.(next as string[]);
+    },
+    [onValueChange, single]
+  );
+
   const [values, setValues] = useControllableState<string[]>({
     value: value === undefined ? undefined : toArray(value),
     defaultValue: toArray(defaultValue),
-    onChange: (v) => (single ? onValueChange?.(v[0] ?? "") : onValueChange?.(v)),
+    onChange: (v) => handleValueChange(single ? (v[0] ?? "") : v),
   });
   const toggle = React.useCallback(
     (v: string) =>

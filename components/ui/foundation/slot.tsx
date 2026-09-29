@@ -10,7 +10,7 @@ export interface SlotProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
 }
 
-type AnyProps = Record<string, any>;
+type AnyProps = Record<string, unknown>;
 
 function mergeProps(slotProps: AnyProps, childProps: AnyProps): AnyProps {
   const merged: AnyProps = { ...slotProps, ...childProps };
@@ -18,14 +18,17 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps): AnyProps {
     const s = slotProps[key];
     const c = childProps[key];
     if (/^on[A-Z]/.test(key) && typeof s === "function" && typeof c === "function") {
-      merged[key] = (...args: unknown[]) => {
-        c(...args);
-        s(...args);
-      };
+      merged[key] = ((...args: unknown[]) => {
+        (c as (...args: unknown[]) => void)(...args);
+        (s as (...args: unknown[]) => void)(...args);
+      }) as unknown;
     } else if (key === "style") {
-      merged[key] = { ...s, ...c };
+      merged[key] = {
+        ...(typeof s === "object" && s !== null ? (s as Record<string, unknown>) : {}),
+        ...(typeof c === "object" && c !== null ? (c as Record<string, unknown>) : {}),
+      };
     } else if (key === "className") {
-      merged[key] = [s, c].filter(Boolean).join(" ");
+      merged[key] = [String(s ?? ""), String(c ?? "")].filter(Boolean).join(" ");
     }
   }
   return merged;
@@ -45,6 +48,6 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(function Slot(
   const childRef = REACT_19 ? child.props.ref : (child as unknown as { ref?: React.Ref<HTMLElement> }).ref;
   return React.cloneElement(child, {
     ...mergeProps(slotProps, child.props),
-    ref: composeRefs(forwardedRef, childRef),
+    ref: composeRefs(forwardedRef, childRef as React.Ref<HTMLElement> | undefined),
   });
 });

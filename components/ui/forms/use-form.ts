@@ -7,23 +7,28 @@ import * as React from "react";
 
 type Path = string;
 
-function get(obj: any, path: Path): any {
+function get<T extends Record<string, unknown> | unknown[]>(obj: T, path: Path): unknown {
   if (path === "") return obj;
-  return path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
+  return path.split(".").reduce<unknown>((o, k) => {
+    if (o == null) return undefined;
+    return (o as Record<string, unknown>)[k];
+  }, obj);
 }
 
-function set(obj: any, path: Path, value: unknown): any {
+function set<T extends Record<string, unknown> | unknown[]>(obj: T, path: Path, value: unknown): T {
   const keys = path.split(".");
-  const clone: any = Array.isArray(obj) ? [...obj] : { ...obj };
-  let cur = clone;
+  const clone: Record<string, unknown> | unknown[] = Array.isArray(obj) ? [...obj] : { ...obj };
+  let cur: Record<string, unknown> = clone as Record<string, unknown>;
+
   for (let i = 0; i < keys.length - 1; i++) {
     const k = keys[i]!;
     const next = cur[k];
     cur[k] = Array.isArray(next) ? [...next] : typeof next === "object" && next !== null ? { ...next } : {};
-    cur = cur[k];
+    cur = cur[k] as Record<string, unknown>;
   }
+
   cur[keys[keys.length - 1]!] = value;
-  return clone;
+  return clone as T;
 }
 
 /* ------------------------------------------------------------------ */
@@ -32,7 +37,7 @@ function set(obj: any, path: Path, value: unknown): any {
 
 export type Validator<T> = (values: T) => Record<string, string> | Promise<Record<string, string>>;
 
-export interface UseFormOptions<T extends Record<string, any>> {
+export interface UseFormOptions<T extends Record<string, unknown>> {
   defaultValues: T;
   /** Return a flat map of dot-path -> error message. Empty / omitted keys are valid. */
   validate?: Validator<T>;
@@ -52,7 +57,7 @@ export interface FieldMeta {
  * enough to wire up this library's FormField without pulling in react-hook-form.
  * Swap in RHF/Formik for anything more advanced; the rest of the library doesn't care.
  */
-export function useForm<T extends Record<string, any>>({ defaultValues, validate, onSubmit, validateOnChange = false }: UseFormOptions<T>) {
+export function useForm<T extends Record<string, unknown>>({ defaultValues, validate, onSubmit, validateOnChange = false }: UseFormOptions<T>) {
   const [values, setValues] = React.useState<T>(defaultValues);
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
   const [errors, setErrors] = React.useState<Record<string, string>>({});
@@ -113,7 +118,7 @@ export function useForm<T extends Record<string, any>>({ defaultValues, validate
   const register = React.useCallback(
     (path: Path) => ({
       name: path,
-      value: get(values, path) ?? "",
+      value: (get(values, path) as string | number | readonly string[] | undefined) ?? "",
       onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const el = e.target;
         const v = el.type === "checkbox" ? (el as HTMLInputElement).checked : el.type === "number" ? (el.value === "" ? null : Number(el.value)) : el.value;
@@ -143,4 +148,4 @@ export function useForm<T extends Record<string, any>>({ defaultValues, validate
   };
 }
 
-export type UseFormReturn<T extends Record<string, any>> = ReturnType<typeof useForm<T>>;
+export type UseFormReturn<T extends Record<string, unknown>> = ReturnType<typeof useForm<T>>;

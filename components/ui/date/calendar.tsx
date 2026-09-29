@@ -50,13 +50,29 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(function
     mode = "single", value, defaultValue, onValueChange, month: monthProp, defaultMonth, onMonthChange, locale,
     weekStartsOn: weekStartProp, minDate, maxDate, isDateDisabled, showOutsideDays = true,
     previousLabel = "Previous month", nextLabel = "Next month", previousIcon = "‹", nextIcon = "›", ...rest
-  } = props as CommonProps & { mode?: "single" | "range"; value?: any; defaultValue?: any; onValueChange?: (v: any) => void };
+  } = props as CommonProps & {
+    mode?: "single" | "range";
+    value?: Date | null | DateRange;
+    defaultValue?: Date | null | DateRange;
+    onValueChange?: ((value: Date | null) => void) | ((value: DateRange) => void);
+  };
 
   const range = mode === "range";
+  const handleValueChange = React.useCallback(
+    (next: Date | null | DateRange) => {
+      if (range) {
+        (onValueChange as ((value: DateRange) => void) | undefined)?.(next as DateRange);
+        return;
+      }
+      (onValueChange as ((value: Date | null) => void) | undefined)?.(next as Date | null);
+    },
+    [onValueChange, range]
+  );
+
   const [selected, setSelected] = useControllableState<Date | null | DateRange>({
     value,
     defaultValue: defaultValue ?? (range ? { from: null, to: null } : null),
-    onChange: onValueChange,
+    onChange: handleValueChange,
   });
   const anchor = range ? ((selected as DateRange).from ?? new Date()) : ((selected as Date | null) ?? new Date());
   const [month, setMonth] = useControllableState<Date>({

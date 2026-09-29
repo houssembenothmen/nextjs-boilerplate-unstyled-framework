@@ -17,10 +17,10 @@ export function login(payload: LoginPayload) {
   return post<LoginResponse>('/auth/login', { ...payload })
 }
 
-export function getMe(params: any = {}) {
+export function getMe(params: Record<string, unknown> = {}) {
   return get<LoginResponse['user']>('/auth/me', { ...params, next: { revalidate: 0 } })
 }
 
-export function logout(params: any = {}) {
+export function logout(params: Record<string, unknown> = {}) {
   return post<{ success: true }>('/auth/logout', params)
 }

@@ -59,15 +59,26 @@ export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(fu
     type: "single" | "multiple";
     value?: string | string[];
     defaultValue?: string | string[];
-    onValueChange?: (v: any) => void;
+    onValueChange?: ((value: string) => void) | ((value: string[]) => void);
   };
   const dir = useDirection();
   const single = type === "single";
 
+  const handleValueChange = React.useCallback(
+    (next: string | string[]) => {
+      if (single) {
+        (onValueChange as ((value: string) => void) | undefined)?.(next as string);
+        return;
+      }
+      (onValueChange as ((value: string[]) => void) | undefined)?.(next as string[]);
+    },
+    [onValueChange, single]
+  );
+
   const [values, setValues] = useControllableState<string[]>({
     value: value === undefined ? undefined : toArray(value),
     defaultValue: toArray(defaultValue),
-    onChange: (next) => (single ? onValueChange?.(next[0] ?? "") : onValueChange?.(next)),
+    onChange: (next) => handleValueChange(single ? (next[0] ?? "") : next),
   });
 
   const toggle = React.useCallback(

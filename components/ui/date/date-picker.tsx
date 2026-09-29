@@ -45,7 +45,7 @@ interface BaseProps {
   children?: React.ReactNode;
 }
 
-function usePickerState(props: BaseProps, mode: "single" | "range", value: Date | null | DateRange, select: (v: any) => void) {
+function usePickerState(props: BaseProps, mode: "single" | "range", value: Date | null | DateRange, select: (v: Date | null | DateRange) => void) {
   const [open, setOpen] = useControllableState({ value: props.open, defaultValue: props.defaultOpen ?? false, onChange: props.onOpenChange });
   const field = useFieldControl({ id: props.id, name: props.name, disabled: props.disabled, invalid: props.invalid, required: props.required, "aria-describedby": props["aria-describedby"] });
   const ctx: Ctx = {
@@ -67,8 +67,9 @@ export interface DatePickerProps extends BaseProps {
  */
 export function DatePicker(props: DatePickerProps) {
   const [value, setValue] = useControllableState<Date | null>({ value: props.value, defaultValue: props.defaultValue ?? null, onChange: props.onValueChange });
-  const { ctx, field, open, setOpen } = usePickerState(props, "single", value, (d: Date | null) => {
-    setValue(d);
+  const { ctx, field, open, setOpen } = usePickerState(props, "single", value, (v: Date | null | DateRange) => {
+    const next = v as Date | null;
+    setValue(next);
     setOpen(false);
   });
   return (
@@ -89,9 +90,10 @@ export interface DateRangePickerProps extends BaseProps {
 
 export function DateRangePicker(props: DateRangePickerProps) {
   const [value, setValue] = useControllableState<DateRange>({ value: props.value, defaultValue: props.defaultValue ?? { from: null, to: null }, onChange: props.onValueChange });
-  const { ctx, field, open, setOpen } = usePickerState(props, "range", value, (r: DateRange) => {
-    setValue(r);
-    if (r.from && r.to) setOpen(false);
+  const { ctx, field, open, setOpen } = usePickerState(props, "range", value, (v: Date | null | DateRange) => {
+    const next = v as DateRange;
+    setValue(next);
+    if (next.from && next.to) setOpen(false);
   });
   return (
     <PickerCtx.Provider value={ctx}>

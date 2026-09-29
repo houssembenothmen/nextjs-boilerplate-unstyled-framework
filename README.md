@@ -1,7 +1,10 @@
 # Next.js 16 boilerplate
 
-App Router, zero runtime dependencies beyond `next`/`react`/`react-dom`, a dependency-free
-`fetch`-based API client, and a full unstyled component library.
+App Router, strict TypeScript, zero runtime dependencies beyond `next`/`react`/`react-dom`,
+a dependency-free `fetch`-based API client, and a full unstyled component library.
+
+The project now uses explicit, typed generics instead of `any` in the core API and form code,
+so the default behavior is easier to reason about and safer to extend.
 
 ## Structure
 
@@ -47,18 +50,31 @@ npm run dev
 ## The API layer
 
 `lib/api/data.ts` is a drop-in replacement for an axios + cookies-next client, built on
-nothing but the platform `fetch`:
+nothing but the platform `fetch` and typed with generic results:
 
 ```ts
 import { get, post } from '../data'
 
-export function getSuggestions(params: any = {}) {
-  return get<any>('/suggestion', params)
+interface SuggestionPayload {
+  query: string
 }
-export function postSuggestion(params: any) {
-  return post<any>('/suggestion', params)
+
+interface Suggestion {
+  id: string
+  text: string
+}
+
+export function getSuggestions(params: Record<string, unknown> = {}) {
+  return get<Suggestion[]>('/suggestion', params)
+}
+
+export function postSuggestion(params: SuggestionPayload) {
+  return post<Suggestion>('/suggestion', params)
 }
 ```
+
+The helper layer exposes typed request/response shapes while still keeping the runtime
+contract simple: `error` results are returned instead of thrown.
 
 Every call:
 - Reads the `token` cookie automatically (or an explicit `params.token`, which wins)
@@ -70,6 +86,10 @@ Every call:
 
 Works identically from a Server Component, a Server Action, a Route Handler, or a Client
 Component — the token lookup in `lib/api/cookies.ts` detects which side it's running on.
+
+The project also includes typed form state utilities and controlled-value patterns in
+`components/ui/forms/use-form.ts` and the date/toggle/accordion primitives so the library
+keeps strong TypeScript safety without sacrificing the unstyled design system approach.
 
 ### Setting the auth cookie
 
