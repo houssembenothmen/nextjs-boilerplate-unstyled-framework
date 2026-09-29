@@ -7,13 +7,13 @@ import { get, post } from '../data'
  */
 
 export function getSuggestions(params: any = {}) {
-  return get<any>('/mobility/suggestion', params)
+  return get<any>('/suggestion', params)
 }
 
 export function getSuggestion(id: string, params: any = {}) {
-  return get<any>(`/mobility/suggestion/${id}`, params)
+  return get<any>(`/suggestion/${id}`, params)
 }
 
 export function postSuggestion(params: any) {
-  return post<any>('/mobility/suggestion', params)
+  return post<any>('/suggestion', params)
 }

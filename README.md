@@ -53,10 +53,10 @@ nothing but the platform `fetch`:
 import { get, post } from '../data'
 
 export function getSuggestions(params: any = {}) {
-  return get<any>('/mobility/suggestion', params)
+  return get<any>('/suggestion', params)
 }
 export function postSuggestion(params: any) {
-  return post<any>('/mobility/suggestion', params)
+  return post<any>('/suggestion', params)
 }
 ```
 
