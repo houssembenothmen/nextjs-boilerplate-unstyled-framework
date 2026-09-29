@@ -152,7 +152,20 @@ State and behavior are exposed using `data-*` attributes such as:
 - `data-loading="true"`
 - `data-invalid="true"`
 - `data-pressed="true"`
+The library also includes an `Autocomplete` field for searchable single-select and multi-select inputs, which works well for country pickers, tag-style searches, and async suggestions.
 
+```tsx
+<Autocomplete
+  multiple
+  loadOptions={searchCountries}
+  minChars={0}
+  value={favoriteCountries}
+  onChange={setFavoriteCountries}
+  clearable
+  maxVisibleChips={5}
+  placeholder="Search countries"
+/>
+```
 That makes it easy to style with:
 
 - plain CSS

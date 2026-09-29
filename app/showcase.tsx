@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { getCountries } from '@/lib/api/resources/countries'
 import {
   Accordion,
   AccordionContent,
@@ -9,6 +10,8 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
+  Autocomplete,
+  type AutocompleteOption,
   Avatar,
   AvatarFallback,
   AvatarImage,
@@ -136,11 +139,16 @@ export function ComponentsShowcase() {
     from: null,
     to: null,
   })
+  const [favoriteCountries, setFavoriteCountries] = React.useState<AutocompleteOption[]>([])
 
   React.useEffect(() => {
-    setDate(new Date())
-    setRange({ from: new Date(), to: null })
+    const now = new Date()
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setDate(now)
+    setRange({ from: now, to: null })
   }, [])
+
+  const searchCountries = React.useCallback(async (query: string) => getCountries(query), [])
 
   const form = useForm({
     defaultValues: { email: '', notes: '', plan: 'pro' },
@@ -240,6 +248,22 @@ export function ComponentsShowcase() {
             <PinInput length={4} aria-label="One-time code" />
             <Switch checked={toggleOn} onCheckedChange={setToggleOn} />
           </div>
+
+          <FormField name="favoriteCountries">
+            <FormLabel>Favorite countries</FormLabel>
+            <Autocomplete
+              multiple
+              loadOptions={searchCountries}
+              minChars={0}
+              value={favoriteCountries}
+              onChange={(next) => {
+                setFavoriteCountries(Array.isArray(next) ? next : next ? [next] : [])
+              }}
+              clearable
+              maxVisibleChips={5}
+              placeholder="Search countries"
+            />
+          </FormField>
 
           <div data-stack>
             <CheckboxGroup value={['updates']} onValueChange={(value) => console.log(value)}>

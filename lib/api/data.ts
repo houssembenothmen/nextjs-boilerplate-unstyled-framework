@@ -63,7 +63,11 @@ async function request<T>(method: HttpMethod, endpoint: string, params: Params =
     // endpoint isn't a valid absolute URL) — that needs to land in the same
     // catch block as network errors, not escape as an unhandled exception.
     const url = hasBody ? buildUrl(endpoint) : buildUrl(endpoint, rest)
-    const token = explicitToken || (await getCookie())
+    const endpointIsAbsolute = /^https?:\/\//i.test(endpoint)
+    const apiOrigin = API_BASE_URL ? new URL(API_BASE_URL).origin : ''
+    const resolvedOrigin = endpointIsAbsolute ? new URL(url).origin : ''
+    const shouldUseAutoAuth = !endpointIsAbsolute || !resolvedOrigin || resolvedOrigin === apiOrigin || (typeof window !== 'undefined' && resolvedOrigin === window.location.origin)
+    const token = explicitToken ?? (shouldUseAutoAuth ? await getCookie() : undefined)
     const headers: Record<string, string> = {
       Accept: 'application/json',
       ...(hasBody ? { 'Content-Type': 'application/json' } : {}),

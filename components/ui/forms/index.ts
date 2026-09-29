@@ -41,5 +41,6 @@ export {
   Combobox, ComboboxInput, ComboboxContent, ComboboxOption, ComboboxEmpty,
   type ComboboxProps, type ComboboxInputProps, type ComboboxContentProps, type ComboboxOptionProps,
 } from "./combobox";
+export { Autocomplete, type AutocompleteProps, type AutocompleteOption } from "./autocomplete";
 export { useForm, type UseFormOptions, type UseFormReturn, type FieldMeta, type Validator } from "./use-form";
 export { useFieldArray, type UseFieldArrayOptions } from "./field-array";
