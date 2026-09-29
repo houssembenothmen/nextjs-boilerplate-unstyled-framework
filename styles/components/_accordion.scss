@@ -1,0 +1,29 @@
+[data-accordion] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+[data-accordion-item] {
+  border: 1px solid var(--ui-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--ui-bg);
+}
+
+[data-accordion-header] {
+  margin: 0;
+}
+
+[data-accordion-trigger] {
+  width: 100%;
+  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+[data-accordion-content] {
+  padding: 0 1rem 1rem;
+  color: var(--ui-muted);
+}

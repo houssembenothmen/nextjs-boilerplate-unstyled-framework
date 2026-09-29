@@ -1,0 +1,194 @@
+@use './variables' as *;
+
+@mixin align-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin breakpointUp($breakpoint) {
+  @media only screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin breakpointDown($breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@mixin title($title-size) {
+  @include breakpointUp(0) {
+    @if $title-size > 2.5rem {
+      font-size: max(calc($title-size / 2), 1.625rem);
+    } @else if $title-size >= 2rem {
+      font-size: max(calc($title-size / 2), 1.375rem);
+    } @else {
+      font-size: max(calc($title-size / 2), 1.125rem);
+    }
+  }
+
+  @include breakpointUp($breakpoints--sm) {
+    @if $title-size > 2.5rem {
+      font-size: max(calc($title-size / 1.75), 1.625rem);
+    } @else if $title-size >= 2rem {
+      font-size: max(calc($title-size / 1.75), 1.375rem);
+    } @else {
+      font-size: max(calc($title-size / 1.75), 1.125rem);
+    }
+  }
+
+  @include breakpointUp($breakpoints--md) {
+    @if $title-size > 2.5rem {
+      font-size: max(calc($title-size / 1.5), 1.625rem);
+    } @else if $title-size >= 2rem {
+      font-size: max(calc($title-size / 1.5), 1.375rem);
+    } @else {
+      font-size: max(calc($title-size / 1.5), 1.125rem);
+    }
+  }
+
+  @include breakpointUp($breakpoints--lg) {
+    @if $title-size > 2.5rem {
+      font-size: max(calc($title-size / 1.25), 1.625rem);
+    } @else if $title-size >= 2rem {
+      font-size: max(calc($title-size / 1.25), 1.375rem);
+    } @else {
+      font-size: max(calc($title-size / 1.25), 1.125rem);
+    }
+  }
+
+  @include breakpointUp($breakpoints--xxl) {
+    @if $title-size > 2.5rem {
+      font-size: max(calc($title-size / 1.125), 1.625rem);
+    } @else if $title-size >= 2rem {
+      font-size: max(calc($title-size / 1.125), 1.375rem);
+    } @else {
+      font-size: max(calc($title-size / 1.125), 1.125rem);
+    }
+  }
+}
+
+@mixin smallTitleSpacing {
+  & {
+    margin-bottom: 1.125rem;
+  }
+
+  @include breakpointUp($breakpoints--sm) {
+    margin-bottom: 1.25rem;
+  }
+
+  @include breakpointUp($breakpoints--md) {
+    margin-bottom: 1.5rem;
+  }
+
+  @include breakpointUp($breakpoints--lg) {
+    margin-bottom: 1.75rem;
+  }
+
+  @include breakpointUp($breakpoints--xl) {
+    margin-bottom: 2rem;
+  }
+}
+
+@mixin custom-scrollbar {
+  @supports (-moz-user-input: auto) {
+    scrollbar-color: #666 #999999;
+    scrollbar-width: thin;
+  }
+
+  &::-webkit-scrollbar {
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-slate-900;
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background-color: #999999;
+    transition: all 0.3s ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #787878;
+  }
+}
+
+@mixin custom-scrollbar-x {
+  @include custom-scrollbar;
+
+  &::-webkit-scrollbar {
+    height: 0.375rem;
+  }
+
+  @include breakpointDown($breakpoints--lg) {
+    padding-bottom: 0.5rem;
+  }
+}
+
+@mixin custom-scrollbar-y {
+  @include custom-scrollbar;
+
+  &::-webkit-scrollbar {
+    width: 0.625rem;
+  }
+}
+
+@mixin cardsImageLoader {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.7);
+    z-index: -1;
+    opacity: 1;
+    filter: blur(2px);
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+  }
+}
+
+@mixin panel-scroll {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+@mixin lineLimit($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

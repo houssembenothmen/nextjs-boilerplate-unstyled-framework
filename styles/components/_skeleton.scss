@@ -1,0 +1,17 @@
+[data-skeleton] {
+  display: inline-block;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.05), rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.05));
+  background-size: 200% 100%;
+  animation: shimmer 1.35s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}

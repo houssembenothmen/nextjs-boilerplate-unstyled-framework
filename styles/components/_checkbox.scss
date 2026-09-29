@@ -1,0 +1,18 @@
+button[role='checkbox'],
+button[role='radio'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding-inline: 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-bg);
+  color: var(--ui-fg);
+}
+
+button[role='checkbox'][data-state='checked'],
+button[role='radio'][data-state='checked'] {
+  border-color: rgba(37, 99, 235, 0.38);
+  background: rgba(37, 99, 235, 0.05);
+}

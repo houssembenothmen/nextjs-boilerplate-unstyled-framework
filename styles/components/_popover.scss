@@ -1,0 +1,27 @@
+[data-popover-content],
+[data-menu-content],
+[data-date-picker-content],
+[data-hover-card-content] {
+  position: absolute;
+}
+
+[data-tooltip-content] {
+  max-width: 16rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-bg);
+  color: var(--ui-fg);
+  font-size: 0.8rem;
+  box-shadow: var(--ui-shadow);
+}
+
+[data-hover-card-content] {
+  width: min(90vw, 20rem);
+}
+
+[data-menu-content] {
+  width: max-content;
+  min-width: 11rem;
+  max-width: 18rem;
+}

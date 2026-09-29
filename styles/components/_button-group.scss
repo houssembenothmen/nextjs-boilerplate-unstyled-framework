@@ -1,0 +1,19 @@
+[data-button-group] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+[data-button-group] > * {
+  border-radius: 0;
+  border: 0;
+  border-right: 1px solid var(--ui-border);
+}
+
+[data-button-group] > *:last-child {
+  border-right: 0;
+}

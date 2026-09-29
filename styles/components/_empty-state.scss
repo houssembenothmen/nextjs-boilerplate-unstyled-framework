@@ -1,0 +1,23 @@
+[data-empty-state] {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--ui-border);
+  border-radius: 0.875rem;
+  text-align: center;
+}
+
+[data-empty-state-title] {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+[data-empty-state-description] {
+  color: var(--ui-muted);
+}
+
+[data-empty-state-actions] {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}

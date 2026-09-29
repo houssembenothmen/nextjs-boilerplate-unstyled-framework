@@ -1,0 +1,31 @@
+[data-pagination] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-pagination-list] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+}
+
+[data-pagination-item] {
+  display: flex;
+}
+
+[data-pagination-item] button,
+[data-pagination-previous],
+[data-pagination-next],
+[data-pagination-first],
+[data-pagination-last] {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.7rem;
+}
+
+[data-pagination-item] button[aria-current='page'] {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.3);
+}

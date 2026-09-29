@@ -1,0 +1,9 @@
+[data-alert] {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--ui-border);
+  border-left: 4px solid var(--ui-accent);
+  border-radius: 0.75rem;
+  background: rgba(37, 99, 235, 0.04);
+}

@@ -1,0 +1,29 @@
+[data-tabs] {
+  display: block;
+}
+
+[data-tabs-list] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--ui-border);
+}
+
+[role='tab'] {
+  border: 0;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  min-height: 2.4rem;
+  padding: 0.5rem 0.75rem 0.7rem;
+  color: var(--ui-muted);
+}
+
+[role='tab'][data-state='active'] {
+  border-color: var(--ui-accent);
+  color: var(--ui-fg);
+}
+
+[role='tabpanel'] {
+  padding-top: 1rem;
+  color: var(--ui-muted);
+}

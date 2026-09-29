@@ -1,0 +1,50 @@
+[data-select] {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+button[role='combobox'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  background: var(--ui-bg);
+}
+
+button[role='combobox'][data-placeholder='true'] {
+  color: var(--ui-muted);
+}
+
+[data-listbox] {
+  min-width: 12rem;
+  margin: 0.25rem 0 0;
+  padding: 0.4rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.75rem;
+  background: var(--ui-bg);
+  box-shadow: var(--ui-shadow);
+}
+
+[data-listbox-option] {
+  display: flex;
+  align-items: center;
+  min-height: 2.4rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+[data-listbox-option][data-active='true'] {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+[data-listbox-option][data-selected='true'] {
+  font-weight: 600;
+}
+
+[data-listbox-option][data-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

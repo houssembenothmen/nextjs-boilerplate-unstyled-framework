@@ -1,0 +1,29 @@
+button[role='switch'] {
+  position: relative;
+  width: 3.2rem;
+  min-width: 3.2rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.08);
+  border-color: transparent;
+}
+
+button[role='switch'][data-state='checked'] {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+button[role='switch']::after {
+  content: '';
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.2);
+  transform: translateX(0);
+  transition: transform 0.15s ease;
+}
+
+button[role='switch'][data-state='checked']::after {
+  transform: translateX(1.2rem);
+}

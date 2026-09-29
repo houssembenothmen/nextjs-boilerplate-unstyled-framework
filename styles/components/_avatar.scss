@@ -1,0 +1,22 @@
+[data-avatar] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid var(--ui-border);
+  overflow: hidden;
+}
+
+[data-avatar] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-avatar-fallback] {
+  font-size: 0.8rem;
+  font-weight: 700;
+}

@@ -1,0 +1,38 @@
+input,
+textarea,
+select,
+button[role='combobox'],
+[data-pin-input] input {
+  width: 100%;
+  min-height: 2.7rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.65rem;
+  background: var(--ui-bg);
+  color: var(--ui-fg);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button[role='combobox']:focus-visible,
+[data-pin-input] input:focus-visible {
+  outline: 3px solid var(--ui-ring);
+  outline-offset: 2px;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  width: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  accent-color: var(--ui-accent);
+}
+
+input[data-invalid],
+textarea[data-invalid],
+select[data-invalid],
+button[role='combobox'][data-invalid='true'],
+[data-pin-input][data-invalid='true'] input {
+  border-color: rgba(220, 38, 38, 0.75);
+}

@@ -1,0 +1,56 @@
+button,
+button[data-variant],
+button[data-icon-button] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--ui-border);
+  border-radius: 0.625rem;
+  background: var(--ui-bg);
+  color: var(--ui-fg);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+button:focus-visible,
+button[data-variant]:focus-visible,
+button[data-icon-button]:focus-visible {
+  outline: 3px solid var(--ui-ring);
+  outline-offset: 2px;
+}
+
+button[data-variant='primary'] {
+  background: var(--ui-accent);
+  border-color: var(--ui-accent);
+  color: #ffffff;
+}
+
+button[data-variant='outline'] {
+  background: transparent;
+}
+
+button[data-variant='ghost'] {
+  border-color: transparent;
+  background: transparent;
+}
+
+button[data-variant='danger'] {
+  background: var(--ui-danger);
+  border-color: var(--ui-danger);
+  color: #ffffff;
+}
+
+button[data-loading='true'],
+button[data-disabled='true'],
+button:disabled {
+  opacity: 0.6;
+}
+
+button[data-pressed='true'],
+button[aria-pressed='true'],
+button[data-state='on'] {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.25);
+}
